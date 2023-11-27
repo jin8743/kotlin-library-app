@@ -6,19 +6,27 @@ import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class User {
 
+  @Getter
   @Id
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
 
+  @Getter
   @Column(nullable = false)
+  @NotNull
   private String name;
 
+  @Getter
+  @Nullable
   private Integer age;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -51,17 +59,4 @@ public class User {
         .orElseThrow();
     targetHistory.doReturn();
   }
-
-  public String getName() {
-    return name;
-  }
-
-  public Integer getAge() {
-    return age;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
 }
