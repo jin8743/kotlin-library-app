@@ -1,4 +1,4 @@
-package com.group.libraryapp.domain
+package com.group.libraryapp.domain.book
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
