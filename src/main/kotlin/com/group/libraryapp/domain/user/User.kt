@@ -10,21 +10,22 @@ import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 
 @Entity
-class User(
+class User constructor(
 
     var name: String,
 
     val age: Int?,
 
+
+    ) {
+
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val userLoanHistories: MutableList<UserLoanHistory> = mutableListOf(),
+    val userLoanHistories: MutableList<UserLoanHistory> = mutableListOf()
 
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     val id: Long? = null
-
-) {
 
     init {
         if (name.isBlank()) {
