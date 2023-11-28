@@ -2,12 +2,8 @@ package com.group.libraryapp.domain.user
 
 import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
-import jakarta.persistence.CascadeType
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType.*
-import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
+import javax.persistence.*
+import javax.persistence.GenerationType.*
 
 @Entity
 class User constructor(
@@ -16,12 +12,10 @@ class User constructor(
 
     val age: Int?,
 
-
     ) {
 
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
     val userLoanHistories: MutableList<UserLoanHistory> = mutableListOf()
-
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

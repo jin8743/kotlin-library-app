@@ -1,9 +1,8 @@
 package com.group.libraryapp.domain.book
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType.*
-import jakarta.persistence.Id
+import javax.persistence.*
+import javax.persistence.GenerationType.*
+import javax.persistence.Id
 
 @Entity
 class Book(
@@ -13,7 +12,6 @@ class Book(
     @Id
     @GeneratedValue(strategy = IDENTITY)
     val id: Long? = null,
-
     ) {
 
 
