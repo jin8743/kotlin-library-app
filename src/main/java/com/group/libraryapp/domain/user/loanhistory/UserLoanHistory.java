@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import lombok.Getter;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Getter
 public class UserLoanHistory {
 
   @Id
@@ -31,10 +33,6 @@ public class UserLoanHistory {
     this.user = user;
     this.bookName = bookName;
     this.isReturn = isReturn;
-  }
-
-  public String getBookName() {
-    return this.bookName;
   }
 
   public void doReturn() {
