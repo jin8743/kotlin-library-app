@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public class BookLoanRequest {
 
-  private String userName;
-  private String bookName;
+  public String userName;
+  public String bookName;
 
 
   public BookLoanRequest(String userName, String bookName) {

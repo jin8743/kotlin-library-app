@@ -6,10 +6,10 @@ import org.jetbrains.annotations.NotNull;
 @Getter
 public class UserUpdateRequest {
 
-  private long id;
+  public long id;
 
   @NotNull
-  private String name;
+  public String name;
 
   public UserUpdateRequest(long id, @NotNull String name) {
     this.id = id;
