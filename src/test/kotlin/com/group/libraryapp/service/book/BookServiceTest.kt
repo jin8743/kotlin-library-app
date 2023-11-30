@@ -2,11 +2,12 @@ package com.group.libraryapp.service.book
 
 import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.book.BookRepository
-import com.group.libraryapp.domain.book.BookType
 import com.group.libraryapp.domain.book.BookType.*
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
+import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
+import com.group.libraryapp.domain.user.loanhistory.UserLoanStatus.*
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
@@ -49,7 +50,7 @@ class BookServiceTest @Autowired constructor(
         val books = bookRepository.findAll()
         assertThat(books).hasSize(1)
         assertThat(books[0].name).isEqualTo("가나다")
-        assertThat(books[0].type).isEqualTo("COMPUTER")
+        assertThat(books[0].type).isEqualTo(COMPUTER)
     }
 
     @Test
@@ -69,7 +70,7 @@ class BookServiceTest @Autowired constructor(
         assertThat(results).hasSize(1)
         assertThat(results[0].bookName).isEqualTo("가나다")
         assertThat(results[0].user.id).isEqualTo(savedUser.id)
-        assertThat(results[0].isReturn).isFalse()
+        assertThat(results[0].status).isEqualTo(LOANED)
     }
 
     @Test
@@ -93,8 +94,8 @@ class BookServiceTest @Autowired constructor(
         //given
         bookRepository.save(Book.fixture())
         val savedUser = userRepository.save(User("이영진", 10))
-        bookService.loanBook(BookLoanRequest("이영진", "가나다"))
-        val request = BookReturnRequest("이영진", "가나다")
+        userLoanHistoryRepository.save(UserLoanHistory.fixture(savedUser, "이상한 나라의 엘리스"))
+        val request = BookReturnRequest("이영진", "이상한 나라의 엘리스")
 
         //when
         bookService.returnBook(request)
@@ -102,6 +103,6 @@ class BookServiceTest @Autowired constructor(
         //then
         val results = userLoanHistoryRepository.findAll()
         assertThat(results).hasSize(1)
-        assertThat(results[0].isReturn).isTrue()
+        assertThat(results[0].status).isEqualTo(RETURNED)
     }
 }

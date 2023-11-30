@@ -28,7 +28,7 @@ class Book(
 
     companion object {
         fun fixture(
-            name: String = "책 이름",
+            name: String = "가나다",
             type: BookType = COMPUTER,
             id: Long? = null
         ): Book {
