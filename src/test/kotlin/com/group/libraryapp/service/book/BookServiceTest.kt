@@ -18,8 +18,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
+@Transactional
 class BookServiceTest @Autowired constructor(
     private val bookService: BookService,
 
@@ -31,11 +33,6 @@ class BookServiceTest @Autowired constructor(
 ) {
 
 
-    @AfterEach
-    fun tearDown() {
-        bookRepository.deleteAll()
-        userRepository.deleteAll()
-    }
 
     @Test
     @DisplayName("책 등록이 정상 동작한다")

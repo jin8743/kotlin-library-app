@@ -15,20 +15,16 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
+@Transactional
 class UserServiceTest @Autowired constructor(
     private val userRepository: UserRepository,
     private val userService: UserService,
     private val userLoanHistoryRepository: UserLoanHistoryRepository,
     private val bookRepository: BookRepository
 ) {
-
-    @AfterEach
-    fun tearDown() {
-        userRepository.deleteAll()
-        bookRepository.deleteAll()
-    }
 
     @Test
     fun saveUserTest() {
